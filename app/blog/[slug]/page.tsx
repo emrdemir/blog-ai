@@ -1,22 +1,22 @@
 import { posts } from '../../data/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { GetStaticProps } from 'next';
+import { BlogPost as BlogPostType } from '../../types/blog';
 
-type PageParams = {
-  slug: string;
-}
-
-export default function BlogPost({
-  params,
-}: {
-  params: PageParams;
-}) {
-  const post = posts.find(post => post.slug === params.slug);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const post = posts.find(post => post.slug === params?.slug);
 
   if (!post) {
-    notFound();
+    return { notFound: true };
   }
 
+  return {
+    props: { post },
+  };
+};
+
+export default function BlogPost({ post }: { post: BlogPostType }) {
   return (
     <main className="min-h-screen p-8 max-w-4xl mx-auto">
       <Link href="/" className="text-blue-600 hover:underline mb-8 inline-block">
