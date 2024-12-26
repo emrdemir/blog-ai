@@ -6,13 +6,14 @@ export async function generateStaticParams() {
   return posts.map(post => ({ slug: post.slug }));
 }
 
-type Props = {
+interface PageProps {
   params: {
     slug: string;
   };
-};
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-export default async function BlogPost({ params }: Props) {
+export default function BlogPost({ params }: PageProps) {
   const post = posts.find(post => post.slug === params.slug);
 
   if (!post) {
