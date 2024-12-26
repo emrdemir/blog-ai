@@ -6,7 +6,13 @@ export async function generateStaticParams() {
   return posts.map(post => ({ slug: post.slug }));
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function BlogPost({ params }: Props) {
   const post = posts.find(post => post.slug === params.slug);
 
   if (!post) {
