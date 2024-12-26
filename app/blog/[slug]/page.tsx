@@ -1,7 +1,6 @@
 import { posts } from '../../data/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { BlogPost as BlogPostType } from '../../types/blog';
 
 export async function generateStaticParams() {
   return posts.map(post => ({ slug: post.slug }));
