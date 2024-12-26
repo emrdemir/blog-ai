@@ -2,11 +2,13 @@ import { posts } from '../../data/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-type Props = {
-  params: { slug: string }
+interface PageProps {
+  params: {
+    slug: string;
+  };
 }
 
-export default function BlogPost({ params }: Props) {
+export default async function BlogPost({ params }: PageProps) {
   const post = posts.find(post => post.slug === params.slug);
 
   if (!post) {
