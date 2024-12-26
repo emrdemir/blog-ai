@@ -1,14 +1,12 @@
 import { posts } from '../../data/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
 
 type Props = {
   params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default function BlogPost({ params, searchParams }: Props) {
+export default function BlogPost({ params }: Props) {
   const post = posts.find(post => post.slug === params.slug);
 
   if (!post) {
